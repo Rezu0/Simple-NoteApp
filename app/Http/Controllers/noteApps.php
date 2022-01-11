@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class noteApps extends Controller
 {
-    
+    public function index(){
+        return view('index');
+    }
 }
