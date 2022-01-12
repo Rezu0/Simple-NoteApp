@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\noteApps;
+use App\Models\noteApp;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [noteApps::class, 'index']);
 Route::post('/todo', [noteApps::class, 'postInputNote']);
+Route::get('todo/{id}/edit', [noteApps::class, 'editNote']);
+Route::delete('todo/{id}/delete', [noteApps::class, 'deleteNote']);

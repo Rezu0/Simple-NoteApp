@@ -9,7 +9,10 @@ use Illuminate\Support\Str;
 class noteApps extends Controller
 {
     public function index(){
-        return view('index');
+        
+        $noteApp = noteApp::orderBy('id', 'desc')->paginate(6);
+
+        return view('index', compact('noteApp'));
     }
 
     public function postInputNote(Request $request){
@@ -24,6 +27,16 @@ class noteApps extends Controller
             'desc' => $request->desc
         ]);
 
-        return redirect('/');
+        return redirect('/')->with('msgInput', 'Berhasil di [' . $request->title .'] tambah');
+    }
+
+    public function editNote($id){
+        $noteApp = noteApp::find($id);
+        return view('edit', compact('noteApp'));
+    }
+
+    public function deleteNote($id){
+        noteApp::find($id)->delete();
+        return redirect('/')->with('msgDelete', 'Berhasil di hapus');
     }
 }
