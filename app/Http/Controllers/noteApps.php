@@ -53,4 +53,12 @@ class noteApps extends Controller
 
         return redirect('/')->with('msgUpdate', '[ ' . $request->title . ' ] berhasil di update');
     }
+    
+    public function updateFinishWork($id){
+        noteApp::find($id)->update([
+            'finish' => 1
+        ]);
+
+        return redirect('/')->with('msgFinish', 'Data yang sudah selesai lebih baik di hapus');
+    }
 }

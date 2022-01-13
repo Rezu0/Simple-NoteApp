@@ -5,24 +5,9 @@
     
 <div class="row">
     <h2 class="my-3 fw-bolder ps-5">Simple Todo List or Note Apps</h2>
-    
-    @if(session()->has('msgInput'))
-      <div class="alert alert-success">
-          {{ session()->get('msgInput') }}
-      </div>
-    @endif
 
-    @if(session()->has('msgDelete'))
-      <div class="alert alert-success">
-          {{ session()->get('msgDelete') }}
-      </div>
-    @endif
+    <x-alert input="msgInput" delete="msgDelete" update="msgUpdate" finish="msgFinish"></x-alert>
 
-    @if(session()->has('msgUpdate'))
-      <div class="alert alert-success">
-          {{ session()->get('msgUpdate') }}
-      </div>
-    @endif
     <form action="/todo" method="post">
         @csrf
         <x-input label="title" field="title" placeholder="Masukan Judul disini..."></x-input>
@@ -45,18 +30,36 @@
             <h5 class="card-title">{{ ucfirst($noteAppData->title) }}</h5>
             <p class="card-text">{{ Str::limit($noteAppData->desc, '100') }}</p>
             <div class="row">
-              <div class="col-6">
-                <a href="todo/{{ $noteAppData->id }}/edit" class="btn btn-success">Edit</a>
-              </div>
-              <div class="col-6">
-                <form action="todo/{{ $noteAppData->id }}/delete" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger">Hapus</button>
-                </form>
-              </div>
+              @if ($noteAppData->finish == null)
+                <div class="col-6">
+                  <a href="todo/{{ $noteAppData->id }}/edit" class="btn btn-success">Edit</a>
+                </div>
+                <div class="col-6">
+                  <form action="todo/{{ $noteAppData->id }}/delete" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">Delete</button>
+                  </form>
+                </div>
+              @else
+                <div class="col-12">
+                  <form action="todo/{{ $noteAppData->id }}/delete" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">Delete</button>
+                  </form>
+                </div>
+              @endif
               <div class="col-12 mt-2">
-                <a href="/todo/finish" class="btn btn-primary">Finish this work</a>
+                @if ($noteAppData->finish == null)
+                  <form action="/finish/{{ $noteAppData->id }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <button class="btn btn-done">Finish</button>
+                  </form>
+                @else
+                    <button class="btn btn-done" disabled>Task is Done</button>
+                @endif
               </div>
             </div>
           </div>
