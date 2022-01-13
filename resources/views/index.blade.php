@@ -17,6 +17,12 @@
           {{ session()->get('msgDelete') }}
       </div>
     @endif
+
+    @if(session()->has('msgUpdate'))
+      <div class="alert alert-success">
+          {{ session()->get('msgUpdate') }}
+      </div>
+    @endif
     <form action="/todo" method="post">
         @csrf
         <x-input label="title" field="title" placeholder="Masukan Judul disini..."></x-input>

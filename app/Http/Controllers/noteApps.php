@@ -27,7 +27,7 @@ class noteApps extends Controller
             'desc' => $request->desc
         ]);
 
-        return redirect('/')->with('msgInput', 'Berhasil di [' . $request->title .'] tambah');
+        return redirect('/')->with('msgInput', '[ ' . $request->title . ' ] Berhasil di tambah');
     }
 
     public function editNote($id){
@@ -41,11 +41,16 @@ class noteApps extends Controller
     }
 
     public function updateNote(Request $request, $id){
+        $request->validate([
+            'title' => 'required|max:255|min:3',
+            'desc' => 'required|min:10'
+        ]);
+
         noteApp::find($id)->update([
             'title' => $request->title,
             'desc'  => $request->desc
         ]);
 
-        return redirect('/');
+        return redirect('/')->with('msgUpdate', '[ ' . $request->title . ' ] berhasil di update');
     }
 }
