@@ -19,3 +19,4 @@ Route::get('/', [noteApps::class, 'index']);
 Route::post('/todo', [noteApps::class, 'postInputNote']);
 Route::get('todo/{id}/edit', [noteApps::class, 'editNote']);
 Route::delete('todo/{id}/delete', [noteApps::class, 'deleteNote']);
+Route::put('todo/{id}', [noteApps::class, 'updateNote']);

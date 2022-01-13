@@ -39,4 +39,13 @@ class noteApps extends Controller
         noteApp::find($id)->delete();
         return redirect('/')->with('msgDelete', 'Berhasil di hapus');
     }
+
+    public function updateNote(Request $request, $id){
+        noteApp::find($id)->update([
+            'title' => $request->title,
+            'desc'  => $request->desc
+        ]);
+
+        return redirect('/');
+    }
 }
