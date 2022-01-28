@@ -44,7 +44,7 @@
                 @endif
               </h5>  
             </a>
-            <p class="card-text">{{ Str::limit($noteAppData->desc, '100') }}</p>
+            <p class="card-text">{{ strip_tags(Str::limit($noteAppData->desc, '100')) }}</p>
             <div class="row">
               @if ($noteAppData->finish == null)
                 <div class="col-6">

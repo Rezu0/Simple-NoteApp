@@ -13,7 +13,7 @@
 
             <x-input label="title" field="title" value="{{ $noteApp->title }}"></x-input>
 
-            <x-textarea label="deskripsi" field="desc" value="{{ $noteApp->desc }}"></x-textarea>
+            <x-textarea label="deskripsi" field="desc" value="{!! $noteApp->desc !!}"></x-textarea>
 
             <button class="btn btn-success my-2">Update Data</button>
         </form>
