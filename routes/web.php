@@ -22,3 +22,8 @@ Route::get('todo/{id}/edit', [noteApps::class, 'editNote']);
 Route::delete('todo/{id}/delete', [noteApps::class, 'deleteNote']);
 Route::put('todo/{id}', [noteApps::class, 'updateNote']);
 Route::put('finish/{id}', [noteApps::class, 'updateFinishWork']);
+Route::get('todo/{noteApp:slug}', [noteApps::class, 'showPerSlug']);
+
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

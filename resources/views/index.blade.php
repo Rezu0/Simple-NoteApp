@@ -2,7 +2,15 @@
 @section('title', 'NoteApps')
 
 @section('content')
-    
+  <a class="dropdown-item" href="{{ route('logout') }}"
+     onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+      {{ __('Logout') }}
+  </a>
+
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+      @csrf
+  </form>
 <div class="row">
     <h2 class="my-3 fw-bolder ps-5">Simple Todo List or Note Apps</h2>
 
@@ -27,7 +35,9 @@
     @foreach ($dataNoteAppChunk as $noteAppData)
       <div class="col card ms-3" style="width: 18rem;">
           <div class="card-body">
-            <h5 class="card-title">{{ ucfirst($noteAppData->title) }}</h5>
+            <a href="/todo/{{ $noteAppData->slug }}">
+              <h5 class="card-title">{{ ucfirst($noteAppData->title) }}</h5>  
+            </a>
             <p class="card-text">{{ Str::limit($noteAppData->desc, '100') }}</p>
             <div class="row">
               @if ($noteAppData->finish == null)

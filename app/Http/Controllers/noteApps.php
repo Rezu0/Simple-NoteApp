@@ -61,4 +61,10 @@ class noteApps extends Controller
 
         return redirect('/')->with('msgFinish', 'Data yang sudah selesai lebih baik di hapus');
     }
+
+    public function showPerSlug(noteApp $noteApp){
+        return view('show', [
+            'noteApp' => $noteApp
+        ]);
+    }
 }
