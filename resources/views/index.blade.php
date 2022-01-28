@@ -35,8 +35,14 @@
     @foreach ($dataNoteAppChunk as $noteAppData)
       <div class="col card ms-3" style="width: 18rem;">
           <div class="card-body">
-            <a href="/todo/{{ $noteAppData->slug }}">
-              <h5 class="card-title">{{ ucfirst($noteAppData->title) }}</h5>  
+            <a href="/todo/{{ $noteAppData->slug }}" class="text-decoration-none text-dark">
+              <h5 class="card-title">
+                @if ($noteAppData->finish == null)
+                  {{ ucfirst($noteAppData->title) }}
+                @else
+                {{ ucfirst($noteAppData->title) }} <i class="fas fa-check-circle text-success"></i>
+                @endif
+              </h5>  
             </a>
             <p class="card-text">{{ Str::limit($noteAppData->desc, '100') }}</p>
             <div class="row">

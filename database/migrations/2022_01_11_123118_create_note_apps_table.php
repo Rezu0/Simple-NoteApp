@@ -17,7 +17,8 @@ class CreateNoteAppsTable extends Migration
             $table->id();
             $table->string('title', 100);
             $table->text('desc');
-            $table->integer('finish');
+            $table->text('slug');
+            $table->integer('finish')->nullable();
             $table->timestamps();
         });
     }
